@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "datafacsaireddydev"
+		},
+		"AzureBlobStorage_linkedser_properties_typeProperties_connectionString_secretName": {
+			"value": "blob-connectionstring"
+		},
+		"AzureKeyVault1linkedser_properties_typeProperties_baseUrl": {
+			"value": "@{linkedService().Azurekey_vault_url}"
+		},
+		"sql_db_linkedser_properties_typeProperties_connectionString_secretName": {
+			"value": "sql-db-connectionstring"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
