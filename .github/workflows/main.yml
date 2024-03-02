@@ -13,10 +13,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Install Azure CLI
-      uses: azure/setup-azure-cli@v1
-      with:
-        install-azure-cli: true
+                - name: Install azure-cli
+  # You may pin to the exact commit or the version.
+  # uses: pietrobolcato/install-azure-cli-action@9a10af1be5e3eb7931f48c0290364a131e7ecd70
+  uses: pietrobolcato/install-azure-cli-action@v1.0.1
+          
 
     - name: Login to Azure
       run: az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
