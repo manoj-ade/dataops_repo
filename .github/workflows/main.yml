@@ -7,16 +7,23 @@ on:
 
 jobs:
   deploy:
-    runs-on: self-hosted  # Assuming you have a self-hosted runner configured
+    runs-on: self-hosted
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Install Azure CLI
-        uses: azure/cli@v1  # Use the official Azure CLI action
-        with:
-          azure-cli-version: '2.30.0'  # Specify version  to avoid breaking changes
+      - name: Install azure-cli
+        uses: pietrobolcato/install-azure-cli-action@v1.0.1
+
+      - name: Make installer script executable
+        run: chmod +x $installer_script_path
+
+      - name: Login to Azure
+        run: az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
+
+      - name: Set Azure subscription
+        run: az account set --subscription ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Validate ARM templates
         run: |
