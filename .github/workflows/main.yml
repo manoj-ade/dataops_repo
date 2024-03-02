@@ -10,31 +10,36 @@ jobs:
     runs-on: self-hosted
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Install Azure CLI
-      uses: azure/setup-azure-cli@v1
-      with:
-        install-azure-cli: true
+      # Install Azure CLI
+      - name: Install azure-cli
+        run: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
-    - name: Login to Azure
-      run: az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
+      # Login to Azure
+      - name: Login to Azure
+        run: az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
 
-    - name: Set Azure subscription
-      run: az account set --subscription ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      # Set Azure subscription
+      - name: Set Azure subscription
+        run: az account set --subscription ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-    - name: Validate ARM templates
-      run: |
-        az deployment group validate --resource-group ${{ secrets.RESOURCE_GROUP_NAME }} --template-file ./datafacsaireddydev/ARMTemplateForFactory.json --parameters ./datafacsaireddydev/ARMTemplateParametersForFactory.json
+      # Validate ARM templates
+      - name: Validate ARM templates
+        run: |
+          az deployment group validate --resource-group ${{ secrets.RESOURCE_GROUP_NAME }} --template-file ./datafacsaireddydev/ARMTemplateForFactory.json --parameters ./datafacsaireddydev/ARMTemplateParametersForFactory.json
 
-    - name: Deploy ARM templates
-      run: |
-        az deployment group create --resource-group ${{ secrets.RESOURCE_GROUP_NAME }} --template-file ./datafacsaireddydev/ARMTemplateForFactory.json --parameters ./datafacsaireddydev/ARMTemplateParametersForFactory.json
+      # Deploy ARM templates
+      - name: Deploy ARM templates
+        run: |
+          az deployment group create --resource-group ${{ secrets.RESOURCE_GROUP_NAME }} --template-file ./datafacsaireddydev/ARMTemplateForFactory.json --parameters ./datafacsaireddydev/ARMTemplateParametersForFactory.json
 
-    - name: Test Deployment
-      run: |
-        # Add testing steps here
+      # Test Deployment
+      - name: Test Deployment
+        run: |
+          # Add testing steps here
 
-    - name: Logout from Azure
-      run: az logout
+      # Logout from Azure
+      - name: Logout from Azure
+        run: az logout
