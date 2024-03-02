@@ -3,7 +3,7 @@ name: Azure Data Factory Deployment
 on:
   push:
     branches:
-      - main  # Adjust branch name as needed
+      - main  # Adjust branch name as needed 
 
 jobs:
   deploy:
@@ -13,9 +13,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # Install Azure CLI using apt package manager
-      - name: Install Azure CLI
+     - name: Install Azure CLI
         uses: docker://mcr.microsoft.com/azure-cli
+
 
       # Login to Azure
       - name: Login to Azure
