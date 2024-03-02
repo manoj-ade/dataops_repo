@@ -15,9 +15,7 @@ jobs:
 
       # Install Azure CLI using apt package manager
       - name: Install Azure CLI
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y azure-cli
+        uses: docker://mcr.microsoft.com/azure-cli
 
       # Login to Azure
       - name: Login to Azure
