@@ -2,7 +2,7 @@ name: Azure Data Factory Deployment
 
 on:
   push:
-    branches:
+    branches: main
       - main  # Adjust branch name as needed
 
 jobs:
@@ -15,6 +15,9 @@ jobs:
 
       - name: Install azure-cli
         uses: pietrobolcato/install-azure-cli-action@v1.0.1
+
+      - name: Make installer script executable
+        run: chmod +x $installer_script_path
 
       - name: Login to Azure
         run: az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
