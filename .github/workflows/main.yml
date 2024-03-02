@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - main  # Adjust branch name as needed 
+      - main  # Adjust branch name as needed
 
 jobs:
   deploy:
@@ -11,11 +11,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Install azure-cli
-  # You may pin to the exact commit or the version.
-  # uses: pietrobolcato/install-azure-cli-action@9a10af1be5e3eb7931f48c0290364a131e7ecd70
-         uses: pietrobolcato/install-azure-cli-action@v1.0.1
-          
+      # Install Azure CLI using pietrobolcato/install-azure-cli-action
+      - name: Install Azure CLI
+        uses: pietrobolcato/install-azure-cli-action@v1.0.1
 
       # Login to Azure
       - name: Login to Azure
@@ -25,7 +23,7 @@ jobs:
       - name: Set Azure subscription
         run: az account set --subscription ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      # Validate ARM templates
+      # Validate ARM templates (change paths and comments as needed)
       - name: Validate ARM templates
         run: |
           az deployment group validate --resource-group ${{ secrets.RESOURCE_GROUP_NAME }} --template-file ./datafacsaireddydev/ARMTemplateForFactory.json --parameters ./datafacsaireddydev/ARMTemplateParametersForFactory.json
@@ -35,8 +33,10 @@ jobs:
         run: |
           az deployment group create --resource-group ${{ secrets.RESOURCE_GROUP_NAME }} --template-file ./datafacsaireddydev/ARMTemplateForFactory.json --parameters ./datafacsaireddydev/ARMTemplateParametersForFactory.json
 
-      # Test Deployment
-      
+      # Replace this comment with your actual deployment tests (optional)
+      # - name: Test Deployment
+      #   run: |
+      #     # Your test commands go here
 
       # Logout from Azure
       - name: Logout from Azure
