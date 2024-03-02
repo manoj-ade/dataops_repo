@@ -1,0 +1,9 @@
+{
+	"name": "datafacsaireddydev",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "07d3cc6f-4fa5-4894-ad24-2d65ed49b53e",
+		"tenantId": "63fd50d9-b6cf-4113-9963-07744e504c40"
+	}
+}

@@ -1,0 +1,17 @@
+{
+	"name": "AzureKeyVault1linkedser",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"parameters": {
+			"Azurekey_vault_url": {
+				"type": "string",
+				"defaultValue": "https://keyvaultsaireddydev.vault.azure.net/"
+			}
+		},
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "@{linkedService().Azurekey_vault_url}"
+		}
+	}
+}

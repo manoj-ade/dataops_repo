@@ -1,0 +1,28 @@
+{
+	"name": "des_blob_dataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage_linkedser",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@concat('sensor_parking_', formatDateTime(addDays(utcNow(), -1), 'yyyy-MM-dd'), '.csv')",
+					"type": "Expression"
+				},
+				"folderPath": "Landing_Directory",
+				"container": "dataops-container"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,21 @@
+{
+	"name": "AzureBlobStorage_linkedser",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobStorage",
+		"typeProperties": {
+			"connectionString": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault1linkedser",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"Azurekey_vault_url": "https://keyvaultsaireddydev.vault.azure.net/"
+					}
+				},
+				"secretName": "blob-connectionstring"
+			}
+		}
+	}
+}
