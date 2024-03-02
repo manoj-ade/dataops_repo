@@ -16,7 +16,7 @@ jobs:
       - name: Install Azure CLI
         uses: azure/cli@v1  # Use the official Azure CLI action
         with:
-          azure-cli-version: '2.30.0'  # Specify version to avoid breaking changes
+          azure-cli-version: '2.30.0'  # Specify version  to avoid breaking changes
 
       - name: Validate ARM templates
         run: |
